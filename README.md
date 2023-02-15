@@ -1,6 +1,7 @@
 # Server
 
 ## Modules:
+- ubuntu (latest) based on
 - apache2
 - php (latest)
 - mysql (latest)
