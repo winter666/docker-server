@@ -7,7 +7,7 @@
 - mysql (latest)
 - redis (latest)
 - composer
-- phpMyAdmin v5.2.1
+- phpMyAdmin (latest)
 
 ## Up the Server
 
@@ -23,8 +23,7 @@
 
 ## Configure phpMyAdmin
 
-- Set `phpmyadmin-local.ap` into `hosts` file
-- You can set file `config.inc.php` from `config.sample.inc.php` at `web/phpMyAdmin-5.2.1` folder
+- Set file `config.user.inc.php` from `config.sample.inc.php` at `docker/phpMyAdmin` folder
 
 ## Additional
 - You can check modules version & connection on `http://greeting-local.api`, if you set `greeting-local.api` into `hosts` file, and then you need run `composer install` on `/var/www/web/infoProject` from docker container
