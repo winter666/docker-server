@@ -43,6 +43,7 @@ services:
       - backend-network
 
   phpmyadmin:
+    container_name: phpmyadmin
     image: phpmyadmin:latest
     restart: always
     ports:
