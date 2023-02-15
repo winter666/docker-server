@@ -1,5 +1,9 @@
 <?php 
 
+function app() {
+	return App\Server\App::getInstance();
+}
+
 function alertWrap(string $string, BootstrapType $enumType) {
 	$type = getBootstrapType($enumType);
 	return "<div class=\"alert alert-{$type}\">{$string}</div>";
@@ -18,13 +22,22 @@ function getBootstrapType(BootstrapType $type): string {
 }
 
 
-function dbConnection(string $dns, string $db_username, string $db_password) {
+function testingDBConnection(App\Server\App $app) {
 	try {
-		$conn = new \PDO($dns, $db_username, $db_password);
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$service = $app->getService(App\Server\MySQLConnectionService::class);
+		$service->connect();
 		return alertWrap('Connection to Database successfull!', BootstrapType::Success);
-		phpinfo();
 	} catch (\Exception $e) {
+		return alertWrap($e->getMessage(), BootstrapType::Danger);
+	}
+}
+
+function testRedisConnection(App\Server\App $app) {
+	try {
+		$service = $app->getService(App\Server\RedisConnectionService::class);
+		$service->connect();
+		return alertWrap('Connection to Redis successfull', BootstrapType::Success);
+	} catch(\Exception $e) {
 		return alertWrap($e->getMessage(), BootstrapType::Danger);
 	}
 }
