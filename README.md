@@ -11,7 +11,7 @@
 
 ## Up the Server
 
-- You should create `Dockerfile` in folder `docker`. Pase code from `Dockerfile.example` to your `Dockerfile`
+- You should create `Dockerfile` in folder `docker`. Paste code from `Dockerfile.example` to your `Dockerfile`
 - Run `docker compose-build` and `docker compose-up`
 
 ## Setting projects
