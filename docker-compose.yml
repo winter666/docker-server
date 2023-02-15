@@ -2,7 +2,7 @@ version: '3'
 
 services:
   webserver:
-    container_name: php_greatserver
+    container_name: php-apache_server
     build:
       context: ./
       dockerfile: ./docker/Dockerfile
@@ -19,7 +19,7 @@ services:
     - db
 
   db:
-    container_name: mysql_greatserver
+    container_name: mysql_server
     image: mysql:latest
     command: ['--default-authentication-plugin=mysql_native_password']
     restart: always
