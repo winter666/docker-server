@@ -46,7 +46,6 @@ RUN rm -R /etc/apache2/sites-enabled/* /etc/apache2/sites-available/* /var/www/*
 
 # Добавляем свои файлы
 ADD ./docker/conf/apache/module_configs/greeting.conf /etc/apache2/sites-enabled/greeting.conf
-ADD ./docker/conf/apache/module_configs/phpmyadmin.conf /etc/apache2/sites-enabled/phpmyadmin.conf
 
 # Указываем рабочую директорию
 WORKDIR /var/wwww
