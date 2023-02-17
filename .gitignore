@@ -1,2 +1,10 @@
 .idea/
+.env
+
+# in web dir
 web/projects/
+
+# In .docker dir
+.docker/databases/
+.docker/logs/
+.docker/nginx/configs

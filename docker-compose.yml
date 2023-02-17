@@ -1,25 +1,38 @@
 version: '3'
 
 services:
-  webserver:
-    container_name: php-apache_server
+  web:
+    image: nginx
+    container_name: nginx_server
     build:
-      context: ./
-      dockerfile: ./docker/Dockerfile
-    environment:
-      XDEBUG_CONFIG: remote_host=host.docker.internal
-      PHP_IDE_CONFIG: serverName=localhost
+      context: .
+      dockerfile: ./.docker/nginx/Dockerfile
     ports:
-      - 80:80
+      - "80:80"
     volumes:
-      - ./:/var/www
+      - ./web/:/var/www/
+      - ./.docker/logs/nginx:/var/log/nginx/
+    depends_on:
+      - php
+    networks:
+      - backend-network
+
+  php:
+    image: php:fpm-alpine
+    container_name: php-fpm
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    volumes:
+      - ./web/:/var/www/
+      - ./.docker/logs/php:/var/log/fpm-php.www.log
     depends_on:
       - db
     networks:
       - backend-network
 
   db:
-    container_name: mysql_server
+    container_name: mysql_db
     image: mysql:latest
     command: ['--default-authentication-plugin=mysql_native_password']
     restart: always
@@ -31,7 +44,7 @@ services:
       MYSQL_USER: mysqluser
       MYSQL_PASSWORD: mysqluser
     volumes:
-      - ./docker/database:/var/lib/mysql
+      - ./.docker/databases/mysql:/var/lib/mysql
     networks:
       - backend-network
 
@@ -51,10 +64,14 @@ services:
     environment:
       - PMA_ARBITRARY=1
     volumes:
-      - ./docker/phpMyAdmin/config.user.inc.php:/etc/phpmyadmin/config.inc.php
+      - ./.docker/phpMyAdmin/config.user.inc.php:/etc/phpmyadmin/config.inc.php
+    depends_on:
+      - db
     networks:
       - backend-network
 
 networks:
+  frontend-network:
+    driver: bridge
   backend-network:
     driver: bridge
