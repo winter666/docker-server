@@ -1,0 +1,23 @@
+{
+    "name": "root/info-project",
+    "type": "project",
+    "require-dev": {
+        "predis/predis": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Server\\": "src/"
+        },
+        "files": [
+            "helpers/functions.php",
+            "helpers/enums.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Davut Sergeev",
+            "email": "sergeev.davutt@gmail.com"
+        }
+    ],
+    "require": {}
+}
